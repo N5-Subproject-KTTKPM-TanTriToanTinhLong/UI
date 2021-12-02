@@ -37,7 +37,7 @@ public class CustomerController {
         try {
             model.addAttribute("food", foodService.findFood(id, token));
         }catch (Exception e){
-            model.addAttribute("food", null);
+            model.addAttribute("food", new Food());
         }
 
         model.addAttribute("customer", new Customer());
