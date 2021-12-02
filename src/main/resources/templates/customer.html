@@ -52,24 +52,24 @@
     </div>
     <div class="row" style="margin-top: -50px;">
         <div class="col-xl-12">
-            <form th:action="@{customers}" method="post">
+            <form th:action="@{/customers(idFood = ${idFood})}" th:object="${customer}" method="post">
                 <h3>THÔNG TIN KHÁCH HÀNG</h3>
                 <div class="row form-group">
                     <label class="col-2">Họ tên khách hàng</label>
                     <div class="col-3">
-                        <input type="text" name="" class="form-control">
+                        <input type="text" th:field="*{nameCustomer}" class="form-control">
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-2">Địa chỉ</label>
                     <div class="col-3">
-                        <input type="text" name="" class="form-control">
+                        <input type="text" th:field="*{address}" class="form-control">
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-2">Món ăn đã chọn</label>
                     <div class="col-3">
-                        <input type="text" th:value="${idFood}" disabled name="" class="form-control">
+                        <input type="text" th:value="${food.foodName}" disabled class="form-control">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-outline-success">Thêm</button>
