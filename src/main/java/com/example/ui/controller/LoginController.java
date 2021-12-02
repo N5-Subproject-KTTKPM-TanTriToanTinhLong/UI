@@ -37,4 +37,11 @@ public class LoginController {
         session.setAttribute("username", jwt.getBody().getUsername());
         return "index";
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("token");
+        session.removeAttribute("username");
+        return "redirect:/login";
+    }
 }
