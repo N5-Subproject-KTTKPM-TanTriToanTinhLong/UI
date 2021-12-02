@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Đăng ký</title>
     <script th:src="@{/static}"></script>
     <link th:rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
 <div class="login">
-    <h1>Login</h1>
-    <form th:action="@{/login}" th:object="${account}" method="post">
+    <h1>Register</h1>
+    <form th:action="@{/register}" th:object="${account}" method="post">
         <input type="text" th:field="*{username}" value="" placeholder="Username" required="required"/>
         <input type="password" th:field="*{password}" value="" placeholder="Password" required="required"/>
+        <input type="text" th:field="*{email}" value="" placeholder="Email" required="required"/>
         <button type="submit" class="btn btn-primary btn-block btn-large">
-            <a style="text-decoration: none;">Sign in</a>
+            <a style="text-decoration: none;">Submit</a>
         </button>
     </form>
-    <p style="color: bisque">Chưa có tài khoản? <a href="register" style="color: whitesmoke"><b>Đăng ký</b></a></p>
 </div>
 
 </body>
