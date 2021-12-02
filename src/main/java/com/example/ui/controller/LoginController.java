@@ -32,9 +32,15 @@ public class LoginController {
 
     @PostMapping
     public String login(LoginRequest account, HttpSession session){
-        ResponseEntity<JwtResponse> jwt = loginService.login(account);
-        session.setAttribute("token", jwt.getBody().getToken());
-        session.setAttribute("username", jwt.getBody().getUsername());
+
+        try {
+            ResponseEntity<JwtResponse> jwt = loginService.login(account);
+            session.setAttribute("token", jwt.getBody().getToken());
+            session.setAttribute("username", jwt.getBody().getUsername());
+        }catch (Exception e){
+            return "redirect:/login";
+        }
+
         return "index";
     }
 

@@ -33,7 +33,13 @@ public class CustomerController {
             return "redirect:/login";
         }
         model.addAttribute("idFood", id);
-        model.addAttribute("food", foodService.findFood(id, token));
+
+        try {
+            model.addAttribute("food", foodService.findFood(id, token));
+        }catch (Exception e){
+            model.addAttribute("food", null);
+        }
+
         model.addAttribute("customer", new Customer());
         return "customer";
     }
