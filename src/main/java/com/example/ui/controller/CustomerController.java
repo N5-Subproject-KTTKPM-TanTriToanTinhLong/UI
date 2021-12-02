@@ -19,7 +19,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping
-    public String getAllCustomer(@RequestParam Long id, Model model){
+    public String getAllCustomer(@RequestParam(defaultValue = "1") Long id, Model model){
         model.addAttribute("customers", customerService.getAllCustomer());
         model.addAttribute("idFood", id);
         return "customer";
