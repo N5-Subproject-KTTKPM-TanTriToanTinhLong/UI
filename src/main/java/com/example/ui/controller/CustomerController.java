@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
@@ -21,20 +23,29 @@ public class CustomerController {
 
     @Autowired
     private FoodService foodService;
+
     @GetMapping
-    public String getAllCustomer(@RequestParam(defaultValue = "1") Long id, Model model){
-        model.addAttribute("customers", customerService.getAllCustomer());
+    public String getAllCustomer(@RequestParam(defaultValue = "1") Long id, Model model, HttpSession session) {
+        String token = (String) session.getAttribute("token");
+        try {
+            model.addAttribute("customers", customerService.getAllCustomer(token));
+        }catch (Exception e){
+            return "redirect:/login";
+        }
         model.addAttribute("idFood", id);
-        model.addAttribute("food", foodService.findFood(id));
+        model.addAttribute("food", foodService.findFood(id, token));
         model.addAttribute("customer", new Customer());
         return "customer";
     }
 
     @PostMapping
-    public String saveCustomer(Model model, Customer customer, @RequestParam(defaultValue = "1") Long idFood){
-        System.out.println(idFood);
+    public String saveCustomer(Model model, Customer customer
+            , HttpSession session
+            , @RequestParam(defaultValue = "1") Long idFood) {
+        String token = (String) session.getAttribute("token");
+
         customer.setFoodId(idFood);
-        customerService.saveCustomer(customer);
+        customerService.saveCustomer(customer, token);
         return "redirect:/customers";
     }
 }
